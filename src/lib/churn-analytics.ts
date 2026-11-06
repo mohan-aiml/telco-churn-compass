@@ -102,8 +102,10 @@ export function tenureGroups(customers: Customer[]): ChurnGroup[] {
     ]),
   );
   for (const c of customers) {
-    const bucket = TENURE_BUCKETS.find((b) => c.tenure >= b.min && c.tenure <= b.max) ?? TENURE_BUCKETS[TENURE_BUCKETS.length - 1];
-    const g = map.get(bucket.label)!;
+    const bucket = TENURE_BUCKETS.find((b) => c.tenure >= b.min && c.tenure <= b.max) ?? TENURE_BUCKETS.at(-1);
+    if (!bucket) continue;
+    const g = map.get(bucket.label);
+    if (!g) continue;
     g.total += 1;
     if (c.churned) g.churned += 1;
     else g.retained += 1;
@@ -129,8 +131,10 @@ export function chargeGroups(customers: Customer[]): ChurnGroup[] {
     ]),
   );
   for (const c of customers) {
-    const bin = CHARGE_BINS.find((b) => c.monthly >= b.min && c.monthly < b.max) ?? CHARGE_BINS[CHARGE_BINS.length - 1];
-    const g = map.get(bin.label)!;
+    const bin = CHARGE_BINS.find((b) => c.monthly >= b.min && c.monthly < b.max) ?? CHARGE_BINS.at(-1);
+    if (!bin) continue;
+    const g = map.get(bin.label);
+    if (!g) continue;
     g.total += 1;
     if (c.churned) g.churned += 1;
     else g.retained += 1;
@@ -233,13 +237,14 @@ export function computeInsights(customers: Customer[], kpis: Kpis): Insight[] {
   const early = tenure.slice(0, 2);
   const earlyTotal = early.reduce((s, g) => s + g.total, 0);
   const earlyChurned = early.reduce((s, g) => s + g.churned, 0);
+  const lateTenureRate = tenure.at(-1)?.churnRate ?? 0;
   if (earlyTotal >= minSegment) {
     const earlyRate = earlyChurned / earlyTotal;
     insights.push({
       title: "The first year is the danger window",
       body: `${pct(earlyRate)} of customers with 0–12 months of tenure churn — ${earlyRate > kpis.churnRate ? "well above" : "at"} the ${pct(
         kpis.churnRate,
-      )} overall rate. Late-tenure cohorts (61–72 months) churn at just ${pct(tenure[tenure.length - 1].churnRate)}.`,
+      )} overall rate. Late-tenure cohorts (61–72 months) churn at just ${pct(lateTenureRate)}.`,
       severity: earlyRate >= 0.35 ? "high" : "medium",
     });
   }
