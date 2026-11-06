@@ -71,7 +71,8 @@ function ChartPanel({
 
 function GroupTooltip({ active, payload }: { active?: boolean; payload?: { payload: ChurnGroup }[] }) {
   if (!active || !payload || payload.length === 0) return null;
-  const g = payload[0].payload;
+  const g = payload[0]?.payload;
+  if (!g) return null;
   return (
     <div className="rounded-lg px-3 py-2 shadow-xl" style={tooltipStyle}>
       <p className="mb-1 text-sm font-semibold">{g.name}</p>
@@ -88,6 +89,7 @@ function GroupTooltip({ active, payload }: { active?: boolean; payload?: { paylo
 function DonutTooltip({ active, payload }: { active?: boolean; payload?: { name?: string; value?: number }[] }) {
   if (!active || !payload || payload.length === 0) return null;
   const entry = payload[0];
+  if (!entry) return null;
   return (
     <div className="rounded-lg px-3 py-2 shadow-xl" style={tooltipStyle}>
       <p className="text-sm font-semibold">{entry.name}</p>
