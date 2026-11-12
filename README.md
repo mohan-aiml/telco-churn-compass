@@ -46,6 +46,7 @@ Screenshots of the dashboard will be added here.
 
 To understand customer churn patterns and provide data-driven recommendations that help businesses improve customer retention.
 
+## Lovable
 
 This project was built with [Lovable](https://lovable.dev).
 
