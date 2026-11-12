@@ -49,7 +49,7 @@ export const Route = createFileRoute("/")({
 
 function SectionIntro({ id, eyebrow, title, children }: { id?: string; eyebrow: string; title: string; children?: React.ReactNode }) {
   return (
-    <div id={id} className="mb-4 mt-10 scroll-mt-24">
+      <div id={id} className="mb-2 mt-5 scroll-mt-24 sm:mt-6">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{eyebrow}</p>
       <h2 className="font-display mt-1 text-xl font-bold tracking-tight">{title}</h2>
       {children ? <p className="mt-0.5 text-sm text-muted-foreground">{children}</p> : null}
@@ -72,32 +72,32 @@ function DashboardPage() {
 
       <div className="lg:pl-64">
         <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-          <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <header className="mb-3 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Executive dashboard
               </p>
-              <h1 className="font-display mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+                className="font-display mt-1 text-xl font-bold tracking-tight sm:text-2xl"
                 Customer Churn Analytics
               </h1>
-              <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
+                className="mt-1 max-w-2xl text-xs text-muted-foreground sm:text-sm"
                 KPIs, churn drivers, customer lookup and retention playbooks — computed live from the
                 uploaded IBM Telco customer CSV.
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="rounded-xl border border-border bg-card px-4 py-2.5 text-right shadow-xs">
+              <div className="rounded-lg border border-border bg-card px-3 py-1.5 text-right shadow-xs">
                 <p className="text-xs font-medium text-muted-foreground">Overall churn rate</p>
                 <p className="kpi-value text-xl text-churn">{pct(kpis.churnRate)}</p>
               </div>
-              <div className="hidden rounded-xl border border-border bg-card px-4 py-2.5 text-right shadow-xs sm:block">
+              <div className="hidden rounded-lg border border-border bg-card px-3 py-1.5 text-right shadow-xs sm:block">
                 <p className="text-xs font-medium text-muted-foreground">Customers in view</p>
                 <p className="kpi-value text-xl">{kpis.total.toLocaleString("en-US")}</p>
               </div>
             </div>
           </header>
 
-          <section id="overview" className="scroll-mt-24 space-y-4">
+          <section id="overview" className="scroll-mt-24 space-y-2">
             <SectionIntro eyebrow="Overview" title="Key performance indicators">
               All figures recalculate against the filters below.
             </SectionIntro>

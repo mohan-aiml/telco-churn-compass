@@ -25,7 +25,7 @@ function FilterSelect({
 }) {
   const isActive = value !== "all";
   return (
-    <label className="relative flex min-w-40 flex-1 flex-col gap-1.5 sm:max-w-56">
+    <label className="relative flex min-w-36 flex-1 flex-col gap-1 sm:max-w-56">
       <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
       <div className="relative">
         <select
@@ -59,7 +59,7 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
     (filters.payment !== "all" ? 1 : 0);
 
   return (
-    <div className="panel flex flex-wrap items-end gap-4 p-4 sm:p-5">
+    <div className="panel flex flex-wrap items-end gap-3 p-3">
       <div className="flex items-center gap-2 pr-1">
         <span className="flex size-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
           <Filter className="size-4" aria-hidden />

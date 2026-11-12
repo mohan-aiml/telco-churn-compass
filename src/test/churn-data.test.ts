@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { customers, DATASET_ROW_COUNT } from "@/data/churn";
-import { computeKpis } from "@/lib/churn-analytics";
+import { computeKpis, groupBy } from "@/lib/churn-analytics";
 
 describe("IBM Telco customer dataset", () => {
   it("loads every CSV customer and computes the correct churn totals", () => {
@@ -28,5 +28,18 @@ describe("IBM Telco customer dataset", () => {
       dependents: false,
       churned: true,
     });
+  });
+
+  it("groups the actual payment methods into populated chart series", () => {
+    const paymentGroups = groupBy(customers, (customer) => customer.payment);
+    const counts = Object.fromEntries(paymentGroups.map((group) => [group.name, group.total]));
+
+    expect(counts).toEqual({
+      "Electronic check": 2365,
+      "Mailed check": 1612,
+      "Bank transfer (automatic)": 1544,
+      "Credit card (automatic)": 1522,
+    });
+    expect(paymentGroups.every((group) => group.retained + group.churned === group.total)).toBe(true);
   });
 });

@@ -19,22 +19,22 @@ const TONES: Record<KpiCardProps["tone"], { chip: string; value: string }> = {
 function KpiCard({ label, value, sub, icon: Icon, tone }: KpiCardProps) {
   const t = TONES[tone];
   return (
-    <div className="panel p-5">
+    <div className="panel p-3 sm:p-3.5">
       <div className="flex items-start justify-between">
-        <p className="text-sm font-medium text-muted-foreground">{label}</p>
-        <span className={`flex size-9 items-center justify-center rounded-lg ${t.chip}`}>
-          <Icon className="size-4.5" aria-hidden />
+        <p className="text-xs font-medium text-muted-foreground sm:text-sm">{label}</p>
+        <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${t.chip}`}>
+          <Icon className="size-4" aria-hidden />
         </span>
       </div>
-      <p className={`kpi-value mt-2 text-3xl sm:text-4xl ${t.value}`}>{value}</p>
-      <p className="mt-1.5 text-xs text-muted-foreground">{sub}</p>
+      <p className={`kpi-value mt-1.5 text-2xl sm:text-3xl ${t.value}`}>{value}</p>
+      <p className="mt-1 text-[11px] leading-tight text-muted-foreground">{sub}</p>
     </div>
   );
 }
 
 export function KpiCards({ kpis }: { kpis: Kpis }) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
       <KpiCard
         label="Total Customers"
         value={num(kpis.total)}
