@@ -1,82 +1,51 @@
-# Telco Churn Compass
+# Telco Churn Compass – Customer Churn Analytics
 
-Build a professional Customer Churn Analytics Dashboard using my IBM Telco Customer Churn dataset.
+An interactive Customer Churn Analytics Dashboard built using the IBM Telco Customer Churn dataset to analyze customer retention, identify churn patterns, and generate actionable business insights.
 
+## Project Overview
 
+Customer churn is a major challenge for telecommunications companies. This project analyzes customer data to understand churn behavior and support better customer retention decisions.
 
-Use the uploaded CSV file as the actual data source.
+## Key Performance Indicators (KPIs)
 
+- Total Customers
+- Churned Customers
+- Retained Customers
+- Overall Churn Rate
 
+## Dashboard Features
 
-Create the following KPI cards:
+- Customer Churn Distribution
+- Churn Analysis by Contract Type
+- Churn Analysis by Payment Method
+- Churn Analysis by Internet Service
+- Churn Analysis by Tenure
+- Monthly Charges vs Churn
+- Customer Search
+- Interactive Filters
+- Business Insights and Retention Recommendations
 
-Total Customers
+## Dataset
 
-Churned Customers
+- Dataset: IBM Telco Customer Churn
+- Total Records: 7,043
+- Fields: 21
 
-Retained Customers
+## Key Results
 
-Churn Rate
-
-Create interactive charts:
-
-Customer Churn Distribution
-
-Churn by Contract Type
-
-Churn by Payment Method
-
-Churn by Internet Service
-
-Churn by Tenure
-
-Monthly Charges vs Churn
-
-Churn by Gender
-
-Add filters for Contract, Internet Service and Payment Method.
-
-
-
-Add customer search functionality and a Business Insights section with customer retention recommendations.
-
-
-
-Use a modern professional business intelligence dashboard design with a dark navy sidebar and clean white background.
-
-
-
-Important:
-
-Use actual uploaded CSV data.
-
-Do not generate fake data.
-
-Calculate all KPIs correctly.
-
-Make charts and filters interactive.
-
-Make the application responsive.
+- Total Customers: 7,043
+- Churned Customers: 1,869
+- Retained Customers: 5,174
+- Churn Rate: 26.5%
 
 This project was built with [Lovable](https://lovable.dev).
 
 **Live app**: https://telco-churn-compass.lovable.app
 
-## Build with Lovable
+## Screenshots
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/03e861b4-f420-486d-a602-61fe153d4a13).
+Screenshots of the dashboard will be added here.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Project Objective
 
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+To understand customer churn patterns and provide data-driven recommendations that help businesses improve customer retention.
