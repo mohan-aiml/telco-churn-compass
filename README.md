@@ -38,10 +38,6 @@ Customer churn is a major challenge for telecommunications companies. This proje
 - Retained Customers: 5,174
 - Churn Rate: 26.5%
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://telco-churn-compass.lovable.app
-
 ## Screenshots
 
 Screenshots of the dashboard will be added here.
@@ -49,3 +45,8 @@ Screenshots of the dashboard will be added here.
 ## Project Objective
 
 To understand customer churn patterns and provide data-driven recommendations that help businesses improve customer retention.
+
+
+This project was built with [Lovable](https://lovable.dev).
+
+**Live app**: https://telco-churn-compass.lovable.app
