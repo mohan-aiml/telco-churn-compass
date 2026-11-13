@@ -49,10 +49,10 @@ export const Route = createFileRoute("/")({
 
 function SectionIntro({ id, eyebrow, title, children }: { id?: string; eyebrow: string; title: string; children?: React.ReactNode }) {
   return (
-      <div id={id} className="mb-2 mt-5 scroll-mt-24 sm:mt-6">
+      <div id={id} className="mb-1 mt-2 scroll-mt-24">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{eyebrow}</p>
-      <h2 className="font-display mt-1 text-xl font-bold tracking-tight">{title}</h2>
-      {children ? <p className="mt-0.5 text-sm text-muted-foreground">{children}</p> : null}
+      <h2 className="font-display mt-0.5 text-lg font-bold tracking-tight">{title}</h2>
+      {children ? <p className="text-xs text-muted-foreground">{children}</p> : null}
     </div>
   );
 }
@@ -70,19 +70,18 @@ function DashboardPage() {
       <Sidebar />
       <MobileNav />
 
-      <div className="lg:pl-64">
-        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-          <header className="mb-3 flex flex-wrap items-end justify-between gap-3">
+      <div className="lg:pl-56">
+        <main className="mx-auto max-w-[1680px] px-4 py-3 sm:px-5 lg:px-6 lg:py-4">
+          <header className="mb-2 flex flex-wrap items-end justify-between gap-2">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Executive dashboard
               </p>
-              <h1 className="font-display mt-1 text-xl font-bold tracking-tight sm:text-2xl">
+              <h1 className="font-display mt-0.5 text-xl font-bold tracking-tight sm:text-2xl">
                 Customer Churn Analytics
               </h1>
-              <p className="mt-1 max-w-2xl text-xs text-muted-foreground sm:text-sm">
-                KPIs, churn drivers, customer lookup and retention playbooks — computed live from the
-                uploaded IBM Telco customer CSV.
+              <p className="mt-0.5 max-w-2xl text-xs text-muted-foreground">
+                Live churn drivers and retention performance from the IBM Telco dataset.
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -97,7 +96,7 @@ function DashboardPage() {
             </div>
           </header>
 
-          <section id="overview" className="scroll-mt-24 space-y-2">
+          <section id="overview" className="scroll-mt-24 space-y-1.5">
             <SectionIntro eyebrow="Overview" title="Key performance indicators">
               All figures recalculate against the filters below.
             </SectionIntro>

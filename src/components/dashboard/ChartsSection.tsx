@@ -59,10 +59,10 @@ function ChartPanel({
   className?: string;
 }) {
   return (
-    <div className={`panel p-4 sm:p-5 ${className}`}>
-      <div className="mb-4">
-        <h3 className="panel-title text-sm sm:text-base">{title}</h3>
-        <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+    <div className={`panel p-3 ${className}`}>
+      <div className="mb-2">
+        <h3 className="panel-title text-sm">{title}</h3>
+        <p className="mt-0.5 text-[11px] text-muted-foreground">{subtitle}</p>
       </div>
       {children}
     </div>
@@ -100,14 +100,14 @@ function DonutTooltip({ active, payload }: { active?: boolean; payload?: { name?
 
 const legendStyle = { fontSize: 12, color: "var(--color-muted-foreground)", paddingTop: 8 };
 
-function ChartSkeleton({ height = 280 }: { height?: number }) {
+function ChartSkeleton({ height = 184 }: { height?: number }) {
   return <div className="animate-pulse rounded-lg bg-muted" style={{ height }} />;
 }
 
 function StackedBars({
   data,
   layout = "horizontal",
-  height = 280,
+  height = 184,
   categoryWidth = 40,
 }: {
   data: ChurnGroup[];
@@ -141,7 +141,7 @@ function StackedBars({
 
 function RateOverBins({
   data,
-  height = 280,
+  height = 184,
 }: {
   data: ChurnGroup[];
   height?: number;
@@ -208,9 +208,9 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
 
   return (
     <section id="charts" className="scroll-mt-24">
-      <div className="mb-4 mt-10">
-        <h2 className="font-display text-xl font-bold tracking-tight">Churn Analysis</h2>
-        <p className="text-sm text-muted-foreground">Every chart recomputes from the customers passing the active filters.</p>
+      <div className="mb-2 mt-3">
+        <h2 className="font-display text-lg font-bold tracking-tight">Churn Analysis</h2>
+        <p className="text-xs text-muted-foreground">Every chart recomputes from the customers passing the active filters.</p>
       </div>
 
       {empty ? (
@@ -218,11 +218,11 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
           No customers match the current filters. Reset a filter to bring the charts back.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2.5 xl:grid-cols-2">
           <ChartPanel title="Customer Churn Distribution" subtitle="Share of retained vs churned customers">
             {mounted ? (
               <div className="relative">
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={184}>
                   <PieChart>
                     <Pie
                       data={donutData}
@@ -255,7 +255,7 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
           </ChartPanel>
 
           <ChartPanel title="Churn by Payment Method" subtitle="Retained vs churned customers by how they pay">
-            {mounted ? <StackedBars data={paymentData} layout="vertical" categoryWidth={150} /> : <ChartSkeleton />}
+            {mounted ? <StackedBars data={paymentData} /> : <ChartSkeleton />}
           </ChartPanel>
 
           <ChartPanel title="Churn by Internet Service" subtitle="DSL and fiber optic carry different risk levels">
@@ -275,7 +275,7 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
             subtitle="Churn rate across monthly bill ranges"
             className="xl:col-span-2"
           >
-            {mounted ? <RateOverBins data={chargeData} height={300} /> : <ChartSkeleton height={300} />}
+            {mounted ? <RateOverBins data={chargeData} /> : <ChartSkeleton />}
           </ChartPanel>
         </div>
       )}

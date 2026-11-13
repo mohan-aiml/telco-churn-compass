@@ -35,20 +35,20 @@ export function Sidebar() {
   const active = useActiveSection();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-      <div className="flex items-center gap-3 px-5 pt-6 pb-5">
-        <div className="flex size-10 items-center justify-center rounded-xl bg-retained/90 text-primary-foreground">
-          <Users className="size-5" aria-hidden />
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col bg-sidebar text-sidebar-foreground lg:flex">
+      <div className="flex items-center gap-2.5 px-4 pt-4 pb-3">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-retained/90 text-primary-foreground">
+          <Users className="size-4" aria-hidden />
         </div>
         <div>
-          <p className="font-display text-lg font-bold tracking-tight">ChurnLens</p>
-          <p className="text-xs text-sidebar-muted">Customer Churn Analytics</p>
+          <p className="font-display text-base font-bold tracking-tight">ChurnLens</p>
+          <p className="text-[11px] text-sidebar-muted">Customer Churn Analytics</p>
         </div>
       </div>
 
-      <div className="mx-4 mb-4 h-px bg-sidebar-border" />
+      <div className="mx-4 mb-2 h-px bg-sidebar-border" />
 
-      <nav className="flex flex-1 flex-col gap-1 px-3">
+      <nav className="flex flex-1 flex-col gap-0.5 px-2.5">
         {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
           <a
             key={id}
@@ -62,10 +62,10 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="mx-4 mb-4 h-px bg-sidebar-border" />
+      <div className="mx-4 mb-2 h-px bg-sidebar-border" />
 
-      <div className="px-5 pb-6">
-        <div className="rounded-xl bg-sidebar-accent p-4">
+      <div className="px-4 pb-4">
+        <div className="rounded-xl bg-sidebar-accent p-3">
           <div className="mb-2 flex items-center gap-2 text-sidebar-accent-foreground">
             <Database className="size-3.5" aria-hidden />
             <p className="text-xs font-semibold uppercase tracking-wider">Data source</p>
