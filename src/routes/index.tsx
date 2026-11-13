@@ -77,10 +77,10 @@ function DashboardPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Executive dashboard
               </p>
-                className="font-display mt-1 text-xl font-bold tracking-tight sm:text-2xl"
+              <h1 className="font-display mt-1 text-xl font-bold tracking-tight sm:text-2xl">
                 Customer Churn Analytics
               </h1>
-                className="mt-1 max-w-2xl text-xs text-muted-foreground sm:text-sm"
+              <p className="mt-1 max-w-2xl text-xs text-muted-foreground sm:text-sm">
                 KPIs, churn drivers, customer lookup and retention playbooks — computed live from the
                 uploaded IBM Telco customer CSV.
               </p>
