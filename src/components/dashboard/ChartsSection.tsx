@@ -52,17 +52,19 @@ function ChartPanel({
   subtitle,
   children,
   className = "",
+  compact = false,
 }: {
   title: string;
   subtitle: string;
   children: React.ReactNode;
   className?: string;
+  compact?: boolean;
 }) {
   return (
-    <div className={`panel p-3 ${className}`}>
-      <div className="mb-2">
-        <h3 className="panel-title text-sm">{title}</h3>
-        <p className="mt-0.5 text-[11px] text-muted-foreground">{subtitle}</p>
+    <div className={`panel ${compact ? "p-2" : "p-3"} ${className}`}>
+      <div className={compact ? "mb-1" : "mb-2"}>
+        <h3 className={`panel-title ${compact ? "text-xs" : "text-sm"}`}>{title}</h3>
+        <p className={`mt-0.5 text-muted-foreground ${compact ? "text-[10px]" : "text-[11px]"}`}>{subtitle}</p>
       </div>
       {children}
     </div>
@@ -104,34 +106,40 @@ function ChartSkeleton({ height = 184 }: { height?: number }) {
   return <div className="animate-pulse rounded-lg bg-muted" style={{ height }} />;
 }
 
+const compactLegendStyle = { ...legendStyle, paddingTop: 2 };
+const compactAxisTick = { ...axisTick, fontSize: 10 };
+
 function StackedBars({
   data,
   layout = "horizontal",
   height = 184,
   categoryWidth = 40,
+  compact = false,
 }: {
   data: ChurnGroup[];
   layout?: "horizontal" | "vertical";
   height?: number;
   categoryWidth?: number;
+  compact?: boolean;
 }) {
+  const tick = compact ? compactAxisTick : axisTick;
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} layout={layout} margin={{ top: 4, right: 8, left: layout === "vertical" ? 8 : -12, bottom: 0 }} barCategoryGap="24%">
         <CartesianGrid stroke={GRID_COLOR} strokeDasharray="3 3" vertical={layout === "vertical"} horizontal={layout === "horizontal"} />
         {layout === "horizontal" ? (
           <>
-            <XAxis dataKey="name" tick={axisTick} tickLine={false} axisLine={{ stroke: GRID_COLOR }} interval={0} />
-            <YAxis tick={axisTick} tickLine={false} axisLine={false} allowDecimals={false} width={44} />
+            <XAxis dataKey="name" tick={tick} tickLine={false} axisLine={{ stroke: GRID_COLOR }} interval={0} />
+            <YAxis tick={tick} tickLine={false} axisLine={false} allowDecimals={false} width={44} />
           </>
         ) : (
           <>
-            <XAxis type="number" tick={axisTick} tickLine={false} axisLine={{ stroke: GRID_COLOR }} allowDecimals={false} />
-            <YAxis type="category" dataKey="name" tick={axisTick} tickLine={false} axisLine={false} width={categoryWidth} />
+            <XAxis type="number" tick={tick} tickLine={false} axisLine={{ stroke: GRID_COLOR }} allowDecimals={false} />
+            <YAxis type="category" dataKey="name" tick={tick} tickLine={false} axisLine={false} width={categoryWidth} />
           </>
         )}
         <Tooltip content={<GroupTooltip />} cursor={{ fill: "var(--color-muted)", opacity: 0.4 }} />
-        <Legend wrapperStyle={legendStyle} iconType="circle" iconSize={8} />
+        <Legend wrapperStyle={compact ? compactLegendStyle : legendStyle} iconType="circle" iconSize={8} />
         <Bar dataKey="retained" name="Retained" stackId="churn" fill={RETAINED_COLOR} radius={layout === "horizontal" ? [0, 0, 0, 0] : [0, 0, 0, 0]} maxBarSize={48} />
         <Bar dataKey="churned" name="Churned" stackId="churn" fill={CHURN_COLOR} radius={layout === "horizontal" ? [4, 4, 0, 0] : [0, 4, 4, 0]} maxBarSize={48} />
       </BarChart>
@@ -181,7 +189,7 @@ function RateOverBins({
   );
 }
 
-export function ChartsSection({ customers }: { customers: Customer[] }) {
+export function ChartsSection({ customers, view }: { customers: Customer[]; view: "overview" | "analysis" }) {
   const mounted = useMounted();
 
   const kpis = useMemo(() => {
@@ -206,6 +214,63 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
 
   const empty = kpis.total === 0;
 
+  if (view === "overview") {
+    return (
+      <section id="overview-charts" className="mt-1 scroll-mt-24" aria-label="Executive churn charts">
+        {empty ? (
+          <div className="panel p-6 text-center text-sm text-muted-foreground">
+            No customers match the current filters. Reset a filter to bring the charts back.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <ChartPanel title="Customer Churn Distribution" subtitle="Share of retained vs churned customers" compact>
+              {mounted ? (
+                <div className="relative">
+                  <ResponsiveContainer width="100%" height={150}>
+                    <PieChart>
+                      <Pie
+                        data={donutData}
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius="62%"
+                        outerRadius="88%"
+                        paddingAngle={2}
+                        strokeWidth={0}
+                      >
+                        <Cell fill={RETAINED_COLOR} />
+                        <Cell fill={CHURN_COLOR} />
+                      </Pie>
+                      <Tooltip content={<DonutTooltip />} />
+                      <Legend wrapperStyle={compactLegendStyle} iconType="circle" iconSize={8} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center" style={{ paddingBottom: 30 }}>
+                    <span className="kpi-value text-2xl">{num(kpis.total)}</span>
+                    <span className="text-[10px] text-muted-foreground">customers · {pct(kpis.churned / kpis.total)} churn</span>
+                  </div>
+                </div>
+              ) : (
+                <ChartSkeleton height={150} />
+              )}
+            </ChartPanel>
+
+            <ChartPanel title="Churn by Contract Type" subtitle="Customer counts by contract" compact>
+              {mounted ? <StackedBars data={contractData} height={150} compact /> : <ChartSkeleton height={150} />}
+            </ChartPanel>
+
+            <ChartPanel title="Churn by Payment Method" subtitle="Retained vs churned by payment method" compact>
+              {mounted ? <StackedBars data={paymentData} height={150} compact /> : <ChartSkeleton height={150} />}
+            </ChartPanel>
+
+            <ChartPanel title="Churn by Internet Service" subtitle="Retained vs churned by internet service" compact>
+              {mounted ? <StackedBars data={internetData} height={150} compact /> : <ChartSkeleton height={150} />}
+            </ChartPanel>
+          </div>
+        )}
+      </section>
+    );
+  }
+
   return (
     <section id="charts" className="scroll-mt-24">
       <div className="mb-2 mt-3">
@@ -219,49 +284,6 @@ export function ChartsSection({ customers }: { customers: Customer[] }) {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-2.5 xl:grid-cols-2">
-          <ChartPanel title="Customer Churn Distribution" subtitle="Share of retained vs churned customers">
-            {mounted ? (
-              <div className="relative">
-                <ResponsiveContainer width="100%" height={184}>
-                  <PieChart>
-                    <Pie
-                      data={donutData}
-                      dataKey="value"
-                      nameKey="name"
-                      innerRadius="62%"
-                      outerRadius="88%"
-                      paddingAngle={2}
-                      strokeWidth={0}
-                    >
-                      <Cell fill={RETAINED_COLOR} />
-                      <Cell fill={CHURN_COLOR} />
-                    </Pie>
-                    <Tooltip content={<DonutTooltip />} />
-                    <Legend wrapperStyle={legendStyle} iconType="circle" iconSize={8} />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center" style={{ paddingBottom: 40 }}>
-                  <span className="kpi-value text-3xl">{num(kpis.total)}</span>
-                  <span className="text-xs text-muted-foreground">customers · {pct(kpis.churned / kpis.total)} churn</span>
-                </div>
-              </div>
-            ) : (
-              <ChartSkeleton />
-            )}
-          </ChartPanel>
-
-          <ChartPanel title="Churn by Contract Type" subtitle="Customer counts and churn rate per contract">
-            {mounted ? <StackedBars data={contractData} /> : <ChartSkeleton />}
-          </ChartPanel>
-
-          <ChartPanel title="Churn by Payment Method" subtitle="Retained vs churned customers by how they pay">
-            {mounted ? <StackedBars data={paymentData} /> : <ChartSkeleton />}
-          </ChartPanel>
-
-          <ChartPanel title="Churn by Internet Service" subtitle="DSL and fiber optic carry different risk levels">
-            {mounted ? <StackedBars data={internetData} /> : <ChartSkeleton />}
-          </ChartPanel>
-
           <ChartPanel title="Churn by Gender" subtitle="Churn is broadly balanced across genders">
             {mounted ? <StackedBars data={genderData} /> : <ChartSkeleton />}
           </ChartPanel>
