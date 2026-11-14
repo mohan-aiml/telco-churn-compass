@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep Overview focused on its four executive charts; place tenure, monthly-charge, and gender charts under the Churn Analysis anchor so the first dashboard view remains compact.

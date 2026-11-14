@@ -9,7 +9,6 @@ import {
   computeRecommendations,
   DEFAULT_FILTERS,
   filterCustomers,
-  pct,
   type DashboardFilters,
 } from "@/lib/churn-analytics";
 import { Sidebar, MobileNav } from "@/components/dashboard/Sidebar";
@@ -49,7 +48,7 @@ export const Route = createFileRoute("/")({
 
 function SectionIntro({ id, eyebrow, title, children }: { id?: string; eyebrow: string; title: string; children?: React.ReactNode }) {
   return (
-      <div id={id} className="mb-1 mt-2 scroll-mt-24">
+      <div id={id} className="mb-1 mt-1 scroll-mt-24">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{eyebrow}</p>
       <h2 className="font-display mt-0.5 text-lg font-bold tracking-tight">{title}</h2>
       {children ? <p className="text-xs text-muted-foreground">{children}</p> : null}
@@ -71,8 +70,8 @@ function DashboardPage() {
       <MobileNav />
 
       <div className="lg:pl-56">
-        <main className="mx-auto max-w-[1680px] px-4 py-3 sm:px-5 lg:px-6 lg:py-4">
-          <header className="mb-2 flex flex-wrap items-end justify-between gap-2">
+        <main className="mx-auto max-w-[1680px] px-4 py-2 sm:px-5 lg:px-6 lg:py-3">
+          <header className="mb-1 flex flex-wrap items-end justify-between gap-2">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Executive dashboard
@@ -84,27 +83,18 @@ function DashboardPage() {
                 Live churn drivers and retention performance from the IBM Telco dataset.
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg border border-border bg-card px-3 py-1.5 text-right shadow-xs">
-                <p className="text-xs font-medium text-muted-foreground">Overall churn rate</p>
-                <p className="kpi-value text-xl text-churn">{pct(kpis.churnRate)}</p>
-              </div>
-              <div className="hidden rounded-lg border border-border bg-card px-3 py-1.5 text-right shadow-xs sm:block">
-                <p className="text-xs font-medium text-muted-foreground">Customers in view</p>
-                <p className="kpi-value text-xl">{kpis.total.toLocaleString("en-US")}</p>
-              </div>
-            </div>
           </header>
 
-          <section id="overview" className="scroll-mt-24 space-y-1.5">
+          <section id="overview" className="scroll-mt-24 space-y-1">
             <SectionIntro eyebrow="Overview" title="Key performance indicators">
               All figures recalculate against the filters below.
             </SectionIntro>
             <KpiCards kpis={kpis} />
             <FilterBar filters={filters} onChange={setFilters} />
+            <ChartsSection customers={filtered} view="overview" />
           </section>
 
-          <ChartsSection customers={filtered} />
+          <ChartsSection customers={filtered} view="analysis" />
           <CustomerSearch customers={filtered} />
           <Insights insights={insights} recommendations={recommendations} />
 

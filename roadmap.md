@@ -1,0 +1,3 @@
+- [x] Keep the four executive KPIs and one-row filters at the top of Overview.
+- [x] Show only four compact charts in a 2×2 Overview grid and move the remaining charts under Churn Analysis.
+- [x] Verify the 1920×1080 first-screen layout and confirm all existing dataset and filter behavior remains intact.
