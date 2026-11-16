@@ -32,12 +32,15 @@ The project combines Python-based data analysis with an interactive dashboard to
 
 👉 Live Dashboard : https://telco-churn-compass.lovable.app
 
-## 📊 Dashboard Preview
-
 ## 📊 Dashboard Screenshots
 
+### 1. Dashboard Overview
 - [Dashboard Overview](screenshots/overview.png)
+
+### 2. Customer Search
 - [Customer Search](screenshots/customer-search.png)
+
+### 3. Business Insights
 - [Business Insights](screenshots/business-insights.png)
 
 
