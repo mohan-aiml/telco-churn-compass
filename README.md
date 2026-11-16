@@ -36,7 +36,7 @@ The project combines Python-based data analysis with an interactive dashboard to
 
 ### 1. Dashboard Overview
 
-
+"C:\Users\Mohan NN\Downloads\overview (1).png"
 
 
 ### 2. Customer Search
