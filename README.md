@@ -35,18 +35,13 @@ The project combines Python-based data analysis with an interactive dashboard to
 ## 📊 Dashboard Preview
 
 ### 1. Dashboard Overview
-
-"C:\Users\Mohan NN\Downloads\overview (1).png"
-
+![Dashboard Overview](./screenshots/overview.png)
 
 ### 2. Customer Search
-
-
-
+![Customer Search](./screenshots/customer-search.png)
 
 ### 3. Business Insights
-
-
+![Business Insights](./screenshots/business-insights.png)
 
 ## 🔍 Key Analysis Areas
 
