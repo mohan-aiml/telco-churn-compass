@@ -36,15 +36,18 @@ The project combines Python-based data analysis with an interactive dashboard to
 
 ### 1. Dashboard Overview
 
-"C:\Users\Mohan NN\Downloads\overview.png"
+<img width="3871" height="1744" alt="overview" src="https://github.com/user-attachments/assets/ed21440c-43fb-4049-98ba-442f93cec865" />
+
 
 ### 2. Customer Search
 
-"C:\Users\Mohan NN\Downloads\customer-search.png"
+<img width="2534" height="3300" alt="customer-search" src="https://github.com/user-attachments/assets/65543a1c-4b5a-4de0-9c44-d3fb87190217" />
+
 
 ### 3. Business Insights
 
-"C:\Users\Mohan NN\OneDrive\Pictures\Screenshots\business-insights.png"
+<img width="1537" height="721" alt="business-insights" src="https://github.com/user-attachments/assets/48381de6-080f-4acf-b6cb-bee078cfd457" />
+
 
 ## 🔍 Key Analysis Areas
 
@@ -78,18 +81,16 @@ The project focuses on identifying:
 
 ## 📁 Project Structure
 
-```text
 telco-churn-compass/
 │
 ├── screenshots/
-│   ├── overview.png
+│   ├── business-insights.png
 │   ├── customer-search.png
-│   └── business-insights.png
+│   └── overview.png
 │
 ├── Customer_Churn_Analysis.ipynb
-├── README.md
-└── .gitignore
-```
+├── .gitignore
+└── README.md
 
 ## 🚀 Project Outcomes
 
