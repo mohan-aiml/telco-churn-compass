@@ -41,12 +41,11 @@ The project combines Python-based data analysis with an interactive dashboard to
 
 ### 2. Customer Search
 
-customer-search.png"
+
 
 
 ### 3. Business Insights
 
-<img width="1537" height="721" alt="business-insights" src="https://github.com/user-attachments/assets/48381de6-080f-4acf-b6cb-bee078cfd457" />
 
 
 ## 🔍 Key Analysis Areas
