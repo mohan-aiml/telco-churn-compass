@@ -75,7 +75,8 @@ The project focuses on identifying:
 7. Business insights and recommendations.
 
 ## 📁 Project Structure
-,,,text
+
+```text
 telco-churn-compass/
 │
 ├── screenshots/
@@ -86,7 +87,8 @@ telco-churn-compass/
 ├── Customer_Churn_Analysis.ipynb
 ├── .gitignore
 └── README.md
-,,,
+```
+
 ## 🚀 Project Outcomes
 
 - Developed an analytical understanding of customer churn.
